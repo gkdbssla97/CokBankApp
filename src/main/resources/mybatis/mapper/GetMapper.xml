@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.miniProj3.domain.dao.GetMapper">
+    <sql id ="findOne">
+        select
+            head as 'head',
+            body as 'body',
+            footer as 'footer',
+            image_url as 'imageUrl',
+            head_image_url as 'headImageUrl'
+    </sql>
+    <select id = "getStockRecommendation" resultType="com.example.miniProj3.domain.dto.main.StockRecommendationResponseDto">
+        select
+            head,
+            body,
+            body_first as 'bodyFirst',
+            body_second as 'bodySecond',
+            body_third as 'bodyThird',
+            footer_first as 'footerFirst',
+            footer_second as 'footerSecond',
+            footer_third as 'footerThird',
+            head_image_url as 'headImageUrl'
+        from stockrecommendation
+    </select>
+    <select id = "getCarInsurance" resultType="com.example.miniProj3.domain.dto.main.CarInsuranceResponseDto">
+        <include refid="findOne"></include>
+        from carinsurance
+    </select>
+    <select id = "getCertificationCar" resultType="com.example.miniProj3.domain.dto.main.CertificationCarResponseDto">
+        select
+            head as 'head',
+            body as 'body',
+            input_txt as 'inputText',
+            footer_first as 'footerFirst',
+            footer_second as 'footerSecond',
+            head_image_url as 'headImageUrl'
+        from certificationcar
+    </select>
+    <select id = "getPrivacyProtection" resultType="com.example.miniProj3.domain.dto.main.PrivacyProtectionResponseDto">
+        <include refid="findOne"></include>
+        from privacyprotection
+    </select>
+    <select id = "getSmartPhishing" resultType="com.example.miniProj3.domain.dto.main.SmartPhishingResponseDto">
+        <include refid="findOne"></include>
+        from smartphishing
+    </select>
+    <select id = "getTheCheat" resultType="com.example.miniProj3.domain.dto.main.TheCheatResponseDto">
+        <include refid="findOne"></include>
+        from thecheat
+    </select>
+    <select id = "getEvent" resultType="com.example.miniProj3.domain.dto.event.EventResponseDto">
+        <include refid="findOne"></include>
+        ,id
+        from event
+    </select>
+    <select id = "getHeader" resultType="com.example.miniProj3.domain.dto.HeaderResponseDto">
+        select
+            head,
+            body,
+            image_url as 'imageUrl'
+        from header
+    </select>
+    <select id = "getFooter" resultType="com.example.miniProj3.domain.dto.FooterResponseDto">
+        select
+            head,
+            body,
+            footer,
+            address,
+            phoneNo,
+            postNo,
+            faxNo
+        from footer
+    </select>
+    <select id = "getCustomer" resultType="com.example.miniProj3.domain.dto.customer.CustomerResponseDto">
+        select
+            header_head as 'headerHead',
+            header_body as 'headerBody',
+            header_footer as 'headerFooter',
+            email,
+            service,
+            body,
+            image_url as 'imageUrl'
+        from customer
+    </select>
+    <select id = "getBoardList" resultType="com.example.miniProj3.domain.dto.customer.BoardListResponseDto">
+        select
+            id,
+            head,
+            body,
+            footer
+        from boardList
+    </select>
+    <select id = "findBoardView" resultType="com.example.miniProj3.domain.dto.customer.BoardViewResponseDto">
+        select
+            content
+        from boardview
+        where id = #{id}
+    </select>
+    <select id = "getFaqList" resultType="com.example.miniProj3.domain.dto.customer.FaqResponseDto">
+        select
+            head,
+            body
+        from faq
+    </select>
+    <select id = "getPrivacyList" resultType="com.example.miniProj3.domain.dto.customer.PrivacyResponseDto">
+        select
+            head,
+            body
+        from privacy
+    </select>
+    <select id = "getServiceList" resultType="com.example.miniProj3.domain.dto.customer.ServiceResponseDto">
+        select
+            title,
+            top_header as 'topHead',
+            top_body as 'topBody',
+            bottom_header as 'bottomHead',
+            bottom_body_first as 'bottomBodyFirst',
+            bottom_body_second as 'bottomBodySecond'
+        from service
+    </select>
+    <select id = "findEventById" resultType="com.example.miniProj3.domain.dto.event.EventResponseDto">
+        <include refid="findOne"></include>
+        from event
+        where id = #{id}
+    </select>
+    <select id = "getStock" resultType="com.example.miniProj3.domain.dto.stock.StockDto">
+        select
+            head,
+            body,
+            head_image_url as headImageUrl,
+            image_url as 'imageUrl',
+            rate_of_return as 'rateOfReturn'
+        from stock
+    </select>
+    <select id = "getStockFooter" resultType="com.example.miniProj3.domain.dto.stock.StockFooterDto">
+        select
+            head,
+            join_inquiry as 'joinInquiry',
+            stock_inquiry as 'stockInquiry',
+            office_hour as 'officeHour',
+            notification,
+            info
+        from stockfooter
+    </select>
+    <select id = "getRoboAIPortfolio" resultType="com.example.miniProj3.domain.dto.stock.RoboAIPortfolioDto">
+        select
+            head,
+            body,
+            percentage
+        from roboaiportfolio
+    </select>
+    <select id = "getInstitutionalPurchase" resultType="com.example.miniProj3.domain.dto.stock.InstitutionalPurchaseDto">
+        select
+            head,
+            buyer,
+            purchase_amount as 'purchaseAmount',
+            unit
+        from institutionalpurchase
+    </select>
+</mapper>

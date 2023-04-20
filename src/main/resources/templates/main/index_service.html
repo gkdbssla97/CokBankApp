@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <title>모바일웹 샘플</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <!-- 주소창 컬러 -->
+    <meta name="theme-color" content="var(--theme)">
+
+    <meta name="description" content="설명설명설명">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="타이틀타이틀">
+    <meta property="og:description" content="설명설명설명">
+    <meta property="og:url" content="https://www.www.www.www/">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="타이틀타이틀">
+    <meta name="twitter:description" content="설명설명설명">
+    <meta name="twitter:domain" content="https://www.www.www.www/">
+
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+
+    <link rel="stylesheet" href="../../css/slick.css">
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="../../../images/common/favicon.ico"> -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=block"
+          rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/slick.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+
+    <div class="header_wrap">
+        <header>
+            <div class="inner">
+                <div class="header">
+                    <div class="util-btn">
+                        <!-- <button type="button" class="btn_home"><span>홈</span></button> -->
+                        <button type="button" class="btn_prev"><span>이전</span></button>
+                    </div>
+                    <div th:insert="~{/fragment/main :: mainheader(${header})}"></div>
+                </div>
+            </div>
+        </header>
+        <div th:insert="~{/fragment/main :: mainbanner(${header}, ${header[0].body})}"></div>
+    </div><!-- // header_wrap -->
+
+
+    <div class="container_wrap">
+        <section class="container">
+            <div>
+                <!--                <div class="main_bnr" id="main_bnr">-->
+                <div>
+                    <img th:src="${header[0].imageUrl}">
+                </div>
+
+            </div>
+            <div class="content_wrap">
+                <div class="main_service_list">
+                    <ul>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getStockRecommendationResponseDto().headImageUrl}" alt=""></span><span
+                                    class="txt"
+                                    th:text="${mainPage.getStockRecommendationResponseDto().head}"></span></a>
+                        </li>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getCertificationCarResponseDto().headImageUrl}"
+                                    alt=""></span><span
+                                    class="txt" th:text="${mainPage.getCertificationCarResponseDto().head}"></span></a>
+                        </li>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getCarInsuranceResponseDto().headImageUrl}" alt=""></span><span
+                                    class="txt" th:text="${mainPage.getCarInsuranceResponseDto().head}"></span></a>
+                        </li>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getSmartPhishingResponseDto().headImageUrl}" alt=""></span><span
+                                    class="txt" th:text="${mainPage.getSmartPhishingResponseDto().head}"></span></a>
+                        </li>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getPrivacyProtectionResponseDto().headImageUrl}"
+                                    alt=""></span><span
+                                    class="txt" th:text="${mainPage.getPrivacyProtectionResponseDto().head}"></span></a>
+                        </li>
+                        <li>
+                            <a href="#g"><span class="icon"><img
+                                    th:src="${mainPage.getTheCheatResponseDto().headImageUrl}" alt=""></span><span
+                                    class="txt" th:text="${mainPage.getTheCheatResponseDto().head}"></span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="line"/>
+                <div class="stock_wrap">
+                    <span class="tit" th:text="${mainPage.getStockRecommendationResponseDto().head}"></span>
+                    <p class="txt" th:text="${mainPage.getStockRecommendationResponseDto().body}"></p>
+                    <ul>
+                        <li th:onclick="|location.href='@{/stock_new_2021}'|">
+                            <a href="#g">
+                                <strong class="tit"
+                                        th:text="${mainPage.getStockRecommendationResponseDto().bodyFirst}"></strong>
+                                <span class="txt"
+                                      th:text="${mainPage.getStockRecommendationResponseDto().footerFirst}"></span>
+                            </a>
+                        </li>
+                        <li th:onclick="|location.href='@{/stock_new_2021}'|">
+                            <a href="#g">
+                                <strong class="tit"
+                                        th:text="${mainPage.getStockRecommendationResponseDto().bodySecond}"></strong>
+                                <span class="txt"
+                                      th:text="${mainPage.getStockRecommendationResponseDto().footerSecond}"></span>
+                            </a>
+                        </li>
+                        <li th:onclick="|location.href='@{/stock_new_2021}'|">
+                            <a href="#g">
+                                <strong class="tit"
+                                        th:text="${mainPage.getStockRecommendationResponseDto().bodyThird}"></strong>
+                                <span class="txt"
+                                      th:text="${mainPage.getStockRecommendationResponseDto().footerThird}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--                인증자동차-->
+                <div class="main_service_passcar">
+                    <div id="cpCtntPassCarConnUrl1">
+                        <div class="tit" th:text="${mainPage.getCertificationCarResponseDto().head}"></div>
+                        <p class="txt" th:text="${mainPage.getCertificationCarResponseDto().body}"></p>
+                        <div class="input">
+                            <input type="text" th:placeholder="${mainPage.getCertificationCarResponseDto().inputText}">
+                        </div>
+                        <div class="btn_group">
+                            <div class="btn">
+                                <button id="cpCtntPassCarConnUrl2" type="button">
+                                    <span th:text="${mainPage.getCertificationCarResponseDto().footerFirst}"></span>
+                                </button>
+                            </div>
+                            <div class="btn">
+                                <button id="cpCtntPassCarConnUrl3" type="button">
+                                    <span th:text="${mainPage.getCertificationCarResponseDto().footerSecond}"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                자동차보험-->
+                <div class="card_bnr_wrap">
+                    <div class="bnr_car">
+                        <h3 th:text="${mainPage.getCarInsuranceResponseDto().head}"></h3>
+                        <span>
+                            <p>
+                            <span class="txt" th:text="${mainPage.getCarInsuranceResponseDto().body}"></span>
+                                <em th:text="${mainPage.getCarInsuranceResponseDto().footer}"></em>
+                            </p>
+				        <div class="img">
+                            <img th:src="${mainPage.getCarInsuranceResponseDto().imageUrl}" alt="자동차보험이미지">
+                        </div>
+                        </span>
+                    </div>
+                </div>
+                <!--                스마트피싱보호-->
+                <div class="card_bnr_wrap">
+                    <div class="bnr_car">
+                        <h3 th:text="${mainPage.getSmartPhishingResponseDto().head}"></h3>
+                        <span>
+                            <p>
+                            <span class="txt" th:text="${mainPage.getSmartPhishingResponseDto().body}"></span>
+                                <em th:text="${mainPage.getSmartPhishingResponseDto().footer}"></em>
+                            </p>
+				        <div class="img">
+                            <img th:src="${mainPage.getSmartPhishingResponseDto().imageUrl}" alt="스마트피싱보호이미지">
+                        </div>
+                        </span>
+                    </div>
+                </div>
+                <!--                개인정보지키미-->
+                <div class="card_bnr_wrap">
+                    <div class="bnr_car">
+                        <h3 th:text="${mainPage.getPrivacyProtectionResponseDto().head}"></h3>
+                        <span>
+                            <p>
+                            <span class="txt" th:text="${mainPage.getPrivacyProtectionResponseDto().body}"></span>
+                                <em th:text="${mainPage.getPrivacyProtectionResponseDto().footer}"></em>
+                            </p>
+				        <div class="img">
+                            <img th:src="${mainPage.getPrivacyProtectionResponseDto().imageUrl}" alt="개인정보지키미이미지">
+                        </div>
+                        </span>
+                    </div>
+                </div>
+                <!--                더치트-->
+                <div class="card_bnr_wrap">
+                    <div class="bnr_car">
+                        <h3 th:text="${mainPage.getTheCheatResponseDto().head}"></h3>
+                        <span>
+                            <p>
+                            <span class="txt" th:text="${mainPage.getTheCheatResponseDto().body}"></span>
+                                <em th:text="${mainPage.getTheCheatResponseDto().footer}"></em>
+                            </p>
+				        <div class="img">
+                            <img th:src="${mainPage.getTheCheatResponseDto().imageUrl}" alt="더치트이미지">
+                        </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section><!-- // container -->
+    </div><!-- // container_wrap -->
+    <div th:insert="~{/fragment/main :: mainfooter(${footer})}"></div>
+    <div th:insert="~{/fragment/main :: loginbanner}"></div>
+    <div class="login_wrap">
+        <div class="intro_login">
+            <div class="logBox_dim" style="display: none;"></div>
+
+            <div class="logBox" style="display: none;">
+                <div class="login_title" style="height:55px; line-height:55px;">
+                    <div id="title_tt1">라이프앤콕 로그인</div>
+                </div>
+
+                <button type="button" class="close_logBox" style="display: block;"><img
+                        src="images/common/login_close.png" alt="닫기"></button>
+
+                <!-- 휴대폰인증로그인 START -->
+                <div class="login_tab">
+                    <label>
+                        <input type="radio" id="loginByPass" name="loginTypeRadioNm" value="0000" checked="checked">
+                        <span class="checkmark"></span>
+                        <span>PASS 로그인</span>
+
+                    </label>
+                    <label>
+                        <input type="radio" id="loginByLifePlus" name="loginTypeRadioNm" value="0001">
+                        <span class="checkmark"></span>
+                        <span>휴대폰 인증 로그인</span>
+                    </label>
+                </div>
+                <!-- 휴대폰인증로그인 END -->
+
+                <div id="passLoginDiv" class="type pass" style="display: block;">
+                    <div class="type1">
+                        <p>복잡한 아이디 패스워드 NO!</p>
+                        <p>내 휴대폰번호로 모든 로그인을 쉽게!</p>
+                    </div>
+                    <button id="mcp_login_btn_pass" type="button" class="btn">
+                        <span class="logo">PASS</span>
+                        <span>휴대폰번호 로그인</span>
+                    </button>
+                </div>
+
+                <!-- 휴대폰인증로그인 START -->
+                <div id="phoneLoginDiv" class="type phone" style="display: none;">
+                    <div class="type2">
+                        <div class="tellecom_wrap">
+                            <div class="tellecom">
+                                <select name="telCdSelectNm" id="telCdSelect">
+                                    <option value="SKT">SKT</option>
+                                    <option value="KT">KT</option>
+                                    <option value="LGU">LG U+</option>
+                                </select>
+                            </div>
+                            <div class="phone">
+                                <input type="tel" id="userPhoneNum" placeholder="01012345678" maxlength="11" value="">
+                            </div>
+                            <!--                            <div class="authNoBtn">-->
+                            <!--                                <button id="sendAuthNoBtn" type="button" disabled="disabled">인증번호 발송</button>-->
+                            <!--                            </div>-->
+                        </div>
+                            <input type="hidden" id ="token" data-token-name="${_csrf.headerName}" placeholder="패스워드를 입력하세요." value="${_csrf.token}"/>
+                            <div class="authNo">
+                                <input type="text" id="inputUserId" placeholder="아이디를 입력하세요.">
+                            </div>
+                            <div class="authNo">
+                                <input type="password" id="inputPassword" placeholder="패스워드를 입력하세요.">
+                            </div>
+                    </div>
+                    <button id="mcp_login_btn_phone" class="btn">
+                        <span>확인</span>
+                    </button>
+                </div>
+                <!-- 휴대폰인증로그인 END -->
+
+            </div>
+        </div>
+    </div>
+</div><!-- // wrap -->
+
+<div class="btn_close">
+    <button type="button"><span>닫기</span></button>
+</div>
+</div><!-- // nav_wrap -->
+
+</div><!-- // gnb_wrap -->
+
+
+<div class="layer alert type1" style="display:none;">
+    <div class="dim"></div>
+    <div class="layer_inner">
+        <div class="layer_content">
+            <div class="tit">제목이 들어갑니다.</div>
+            <p>내용이 들어갑니다.</p>
+        </div>
+        <div class="btn_group">
+            <div>
+                <button type="button" class="prev"><span>버튼명</span></button>
+            </div><!-- prev, back, cancel -->
+            <div>
+                <button type="button" class="next"><span>확인</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layer alert" id="login_success"><!-- id값은 개발에 맞게 수정 -->
+    <div class="layer_inner">
+        <div class="layer_content">
+            <p>로그인이 성공하였습니다.</p>
+        </div>
+        <div class="btn_group">
+            <div>
+                <button type="button" class="next"><span>확인</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layer alert" id="login_fail"><!-- id값은 개발에 맞게 수정 -->
+    <div class="layer_inner">
+        <div class="layer_content">
+            <p>로그인이 실패하였습니다.</p>
+        </div>
+        <div class="btn_group">
+            <div>
+                <button type="button" class="next"><span>확인</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="../../../js/slick.js"></script> -->
+<script src="../../js/temp.js"></script>
+
+<script type="text/javascript">
+
+
+    // $(".main_bnr").slick({
+    // 		infinite: false,
+    // 		arrows: true,
+    // 		speed:300,
+    // 		slidesToShow: 1,
+    // 		slidesToScroll: 3,
+    // 		dots: false,
+    // 		centerMode: true,
+    // 		focusOnSelect: false,
+    // 	});
+
+
+    $(document).ready(function () {
+        function loginSuccess() {
+            dim.style.display = "block";
+            const popup_temp = document.querySelector("#login_success");
+            popup_temp.style.display = "block"
+        }
+        function loginFailure() {
+            dim.style.display = "block";
+            const popup_temp = document.querySelector("#login_fail");
+            popup_temp.style.display = "block"
+        }
+
+        $('#mcp_login_btn_phone').click(
+            function () {
+            $.ajax({
+                type: "POST",
+                url: "/index_service",
+                dataType: 'json',
+                data: {
+                    userId: $('#inputUserId').val(),
+                    password: $('#inputPassword').val(),
+                    telcoTyCd: $("select[name=telCdSelectNm]").val(),
+                    phoneNo: $('#userPhoneNum').val()
+                },
+                // beforeSend : function (xhr) {
+                //     var $token = $("#token");
+                //     xhr.setRequestHeader($token.data("token-name"), $token.val());
+                // },
+                success: function (response) {
+                    if(response.code === "200") {
+                        /* 이벤트 참여 완료 */
+                        loginSuccess(response.item.url);
+                        // alert("로그인 성공")
+                        console.log(response.item.url)
+                        $("#login_success").click(function () {
+                            window.location.href = response.item.url;
+                        })
+                        console.log(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (error) {
+                    loginFailure();
+                }
+            })
+        });
+
+        // 휴대폰인증로그인 START
+        // 패스 로그인 라디오 버튼 클릭
+        $("#loginByPass").click(function () {
+
+            $("#passLoginDiv").show();
+            $("#phoneLoginDiv").hide();
+        })
+        // 휴대폰인증로그인 END
+
+        // 휴대폰인증로그인 START
+        // 라이프앤콕 로그인 라디오 버튼 클릭
+        $("#loginByLifePlus").click(function () {
+
+            $("#passLoginDiv").hide();
+            $("#phoneLoginDiv").show();
+            $("#sendAuthNoBtn").text("인증번호 발송");
+            $("#sendAuthNoBtn").attr("disabled", false);
+        });
+        // 휴대폰인증로그인 END
+
+        // 휴대폰인증로그인 START
+        // 전화번호 유효성 체크
+        $("#userPhoneNum").on("keydown", function (event) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ""));
+
+            if (event.keyCode == 8) {
+                return true;
+            }
+
+            if ($(this).val().length >= 11) {
+                $(this).blur();
+            }
+        });
+        // 휴대폰인증로그인 END
+
+        // 라이프앤콕 이용하기
+        $(".btn").on("click", function () {
+            console.log("hi")
+            $(".logBox_dim").show(0);
+            $(".logBox").slideDown(300);
+
+            $(".close_logBox").slideDown(300);
+        });
+
+        // 라이프앤콕 이용하기 X 버튼, logbox_dim 클릭
+        $("button.close_logBox, .logBox_dim").on("click", function () {
+
+            $(".logBox_dim").hide(0);
+            $(".logBox").slideUp(300);
+            $(this).slideUp(0);
+            $(".open_logBox").slideDown(300);
+        });
+
+        $('#main_bnr').on('init', function (event, slick) {
+            $(this).append('<div class="slick-counter"><span class="current"></span> / <span class="total"></span></div>');
+            $('.current').text(slick.currentSlide + 1);
+            $('.total').text(slick.slideCount);
+        })
+            .slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                infinite: true,
+                arrows: false
+            })
+            .on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                $('.current').text(nextSlide + 1);
+            });
+
+    })
+</script>
+
+
+</body>
+<script th:inline="javascript">
+    function moveMenu(menuId) {
+        if (menuId === 'mainPageServiceMenu') {
+            location.reload();
+        } else if (menuId === 'mainPageEventMenu') {
+            location.href = '/index_event';
+        } else if (menuId === 'mainPageCustomerMenu') {
+            location.href = '/index_customer';
+        }
+    }
+
+    // $.ajax({
+    //     url: "/index_service",
+    //     type: 'POST',
+    // }).done(function(data) {
+    //     $("wrap").replaceWith(data);
+    //     console.log(data);
+    // });
+</script>
+</html>

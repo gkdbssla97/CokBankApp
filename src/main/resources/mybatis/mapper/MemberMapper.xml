@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.miniProj3.domain.dao.MemberMapper">
+    <select id="getMemberList" resultType="com.example.miniProj3.domain.dto.MemberRequestDto">
+        select member_id as 'id',
+               userId,
+               password,
+               phoneNo,
+               telcoTycd,
+               registerDate
+        from member
+    </select>
+
+<!--    회원가입-->
+<!--    회원 정보 가져오기-->
+    <select id="findMemberByUserId" resultType="com.example.miniProj3.domain.dto.MemberRequestDto">
+        select member_id as 'id',
+               password, phoneNo, telcoTycd, userId, deleteDate, registerDate, updateDate
+        from member
+        where userId = #{userId}
+    </select>
+    <select id="findMemberById" resultType="com.example.miniProj3.domain.dto.MemberRequestDto">
+        select *
+        from member
+        where member_id = #{Id}
+    </select>
+<!--    회원정보 수정-->
+<!--탈퇴-->
+    <delete id="deleteMember">
+        delete
+        from member
+        where userId = #{userId} and phoneNo = #{phoneNo}
+    </delete>
+    <select id="findAuthoritiesMappingByUserId" resultType="com.example.miniProj3.domain.dto.MemberAuthoritiesMappingDto">
+        SELECT member_authorities_mapping_id as 'memberAuthoritiesMappingId',
+               member_authorities_code_id as 'memberAuthoritiesCodeId',
+               member_id as'memberId'
+        FROM memberauthoritiesmapping mp
+        where mp.member_id
+                  in (select member_id from member m where m.userId = #{userId});
+    </select>
+    <select id="findAuthoritiesCodeByCodeId" resultType="com.example.miniProj3.domain.member.MemberAuthoritiesCode">
+        SELECT member_authorities_code_id as 'memberAuthoritiesCodeId',
+               authority,
+               registerDate
+        FROM memberAuthoritiesCode mp
+        where member_authorities_code_id = #{memberAuthoritiesCodeId}
+    </select>
+
+</mapper>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <title>모바일웹 샘플</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <!-- 주소창 컬러 -->
+    <meta name="theme-color" content="var(--theme)">
+
+    <meta name="description" content="설명설명설명">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="타이틀타이틀">
+    <meta property="og:description" content="설명설명설명">
+    <meta property="og:url" content="https://www.www.www.www/">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="타이틀타이틀">
+    <meta name="twitter:description" content="설명설명설명">
+    <meta name="twitter:domain" content="https://www.www.www.www/">
+
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+
+    <link rel="stylesheet" href="../../css/slick.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=block"
+          rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/slick.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+
+    <div class="header_wrap">
+        <header>
+            <div class="inner">
+                <div class="header">
+                    <div class="util-btn">
+                        <!-- <button type="button" class="btn_home"><span>홈</span></button> -->
+                        <button type="button" class="btn_prev" th:onclick="|location.href='/index_service'|"><span>이전</span></button>
+                    </div>
+                    <div th:insert="~{/fragment/main :: mainheader(${header})}"></div>
+                </div>
+            </div>
+        </header>
+        <div th:insert="~{/fragment/main :: mainbanner(${header}, ${header[1].body})}"></div>
+    </div><!-- // header_wrap -->
+
+
+    <div class="container_wrap">
+
+        <section class="container">
+
+            <div class="content_wrap">
+
+                <div class="event_wrap">
+
+                    <div class="event_sort">
+                        <label><input type="radio" th:id="eventAll" name="ra1" checked/><span class="txt" th:text="전체"></span></label>
+                        <label><input type="radio" th:id="onGoingEvent" name="ra1"/><span class="txt" th:text="진행중"></span></label>
+                        <label><input type="radio" th:id="endEvent" name="ra1"/><span class="txt" th:text="종료"></span></label>
+                    </div>
+                    <div id = "index_event">
+                        <div class="event_list" th:id ="defaultList" th:each="event : ${eventList}">
+                            <ul>
+                                <li class="item" th:id= "eventPageInfo" th:onclick="|location.href='@{/event_view(id=${event.id})}'|">
+                                    <div class="thum">
+                                        <a><img th:src="${event.headImageUrl}" alt="배너1"></a>
+                                        <!-- <span class="deadline">종료</span> -->
+                                    </div>
+                                    <div class="tit"><strong th:text="${event.head}">&nbsp;</strong></div>
+                                    <span class="date" th:text="${event.footer}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- // event_wrap -->
+
+            </div>
+
+        </section><!-- // container -->
+
+    </div><!-- // container_wrap -->
+    <div th:insert="~{/fragment/main :: mainfooter(${footer})}"></div>
+<!--    <div th:insert="~{/fragment/main :: loginbanner}"></div>-->
+
+</div><!-- // wrap -->
+
+
+<div class="dim"></div>
+<div class="layer alert type1" style="display:none;">
+    <div class="layer_inner">
+        <div class="layer_content">
+            <div class="tit">제목이 들어갑니다.</div>
+            <p>내용이 들어갑니다.</p>
+        </div>
+        <div class="btn_group">
+            <div>
+                <button type="button" class="prev"><span>버튼명</span></button>
+            </div><!-- class="name" prev, back, cancel -->
+            <div>
+                <button type="button" class="next"><span>확인</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/temp.js">
+</script>
+<script type="text/javascript">
+    function showEventList(data) {
+
+        $("#index_event").empty();
+        $("#defaultList").hide();
+        for(let i = 0; i < data.length; i++) {
+            var html = "<div class=\"event_list\">";
+            html += "<ul>";
+            console.log(data[i].id)
+            // html += "<li class=\"item\" onclick=\"location.href='/event_view?id=' + data[i].id\">";
+            html += "<li class=\"item\" onclick=\"location.href='/event_view?id=" + data[i].id + "'\"" + ">";
+            html += "<div class=\"thum\">";
+            html += "<a><img src=" + data[i].headImageUrl + " alt=\"배너1\"></a>";
+            html += "</div>";
+            html += "<div class=\"tit\"><strong>" + data[i].head + "</strong></div>";
+            html += "<span class=\"date\">" + data[i].footer + "</span>";
+            html += "</li>";
+            html += "</ul>";
+            html += "</div>";
+
+            $("#index_event").append(html);
+        }
+    }
+</script>
+</body>
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+        // 전체 클릭
+        $("#eventAll").click(function(event) {
+            selectEventList(0);
+            listStatus = 0;
+        });
+        // 진행중 클릭
+        $("#onGoingEvent").click(function(event) {
+            selectEventList(1);
+            listStatus = 1;
+        });
+        // 종료 클릭
+        $("#endEvent").click(function(event) {
+            selectEventList(2);
+            listStatus = 2;
+        });
+    });
+
+    function selectEventList(value) {
+
+        $.ajax({
+            type: "POST",
+            url: "/index_event",
+            data: {value: value},
+            success: function (data) {
+                console.log(data);
+                showEventList(data);
+            },
+            error: function (error) {
+                alert('사이트 요청 실패');
+            }
+        })
+
+        $('#index_event').show();
+    }
+
+    function moveMenu(menuId) {
+        if (menuId === 'mainPageServiceMenu') {
+            location.href = '/index_service';
+        } else if (menuId === 'mainPageEventMenu') {
+            location.reload();
+        } else if (menuId === 'mainPageCustomerMenu') {
+            location.href = '/index_customer';
+        } else if (menuId === 'eventPageInfo') {
+            location.href = '/event_view';
+        }
+    }
+</script>
+</html>

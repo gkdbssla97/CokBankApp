@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer th:fragment="boardfooter (param1)">
+    <div th:data-parameter1="${param1}" th:onclick="|location.href=getAttribute('data-parameter1')|">
+        <div class="board_footer" style="height: 84px;">
+            <div class="btn_wrap">
+                <button type="button" id="moveNoticeList">
+                    <span th:text="목록"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

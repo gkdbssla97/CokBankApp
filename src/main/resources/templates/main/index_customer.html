@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+	<head>
+	<title>모바일웹 샘플</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+	<!-- 주소창 컬러 -->
+	<meta name="theme-color" content="var(--theme)">
+
+	<meta name="description" content="설명설명설명">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="타이틀타이틀">
+	<meta property="og:description" content="설명설명설명">
+	<meta property="og:url" content="https://www.www.www.www/">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="타이틀타이틀">
+	<meta name="twitter:description" content="설명설명설명">
+	<meta name="twitter:domain" content="https://www.www.www.www/">
+
+	<link rel="stylesheet" href="../../css/reset.css">
+	<link rel="stylesheet" href="../../css/common.css">
+
+	<link rel="stylesheet" href="../../css/slick.css">
+
+
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=block" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="../../js/slick.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+
+	<div class="header_wrap">
+		<header>
+			<div class="inner">
+				<div class="header">
+					<div class="util-btn">
+						<!-- <button type="button" class="btn_home"><span>홈</span></button> -->
+						<button type="button" class="btn_prev" th:onclick="|location.href='/index_service'|"><span>이전</span></button>
+					</div>
+					<div th:insert="~{/fragment/main :: mainheader(${header})}"></div>
+				</div>
+			</div>
+		</header>
+		<div th:insert="~{/fragment/main :: mainbanner(${header}, ${header[2].body})}"></div>
+	</div><!-- // header_wrap -->
+
+	<div class="container_wrap">
+		<section class="container">
+
+			<div class="content_wrap">
+				<div class="index_customer">
+					<div class="cus_header">
+						<div class="tit" th:text="${customer[0].headerHead}"></div>
+						<p class="tel" th:text="${customer[0].headerBody}" th:style="'color: black;'"></p>
+						<p class="time" th:text="${customer[0].headerFooter}"></p>
+						<button type="button" th:onclick="'alert(\'고객센터 전화연결 중입니다.\');'">
+							<a href="tel:1800-4273">
+								<img th:src="${customer[0].imageUrl}" alt="전화문의">
+							</a>
+						</button>
+					</div>
+					<ul>
+						<li><a href="#g"><span th:text="${customer[0].email}"></span></a></li>
+						<li><a href="#g"><span th:text="${customer[0].service}"></span></a></li>
+					</ul>
+				</div>
+
+				<hr class="line">
+
+				<div>
+					<ul class="link_list">
+						<li th:id ="board" th:onclick="moveMenu(this.id)"><a href="#g"><span th:text="${customer[0].body}"></span></a></li>
+						<li th:id ="faq" th:onclick="moveMenu(this.id)"><a href="#g"><span th:text="${customer[1].body}"></span></a></li>
+						<li th:id ="privacy" th:onclick="moveMenu(this.id)"><a href="#g"><span th:text="${customer[2].body}"></span></a></li>
+					</ul>
+				</div>
+
+				<hr class="line">
+
+				<div>
+					<ul class="link_list">
+						<li th:id ="service" th:onclick="moveMenu(this.id)"><a href="#g"><span th:text="${customer[3].body}"></span></a></li>
+					</ul>
+				</div>
+
+			</div>
+
+		</section><!-- // container -->
+
+	</div><!-- // container_wrap -->
+	<div th:insert="~{/fragment/main :: mainfooter(${footer})}"></div>
+<!--	<div th:insert="~{/fragment/main :: loginbanner}"></div>-->
+</div><!-- // wrap -->
+
+<div class="layer alert type1" style="display:none;">
+	<div class="dim"></div>
+	<div class="layer_inner">
+		<div class="layer_content">
+			<div class="tit">제목이 들어갑니다.</div>
+			<p>내용이 들어갑니다.</p>
+		</div>
+		<div class="btn_group">
+			<div><button type="button" class="prev"><span>버튼명</span></button></div><!-- prev, back, cancel -->
+			<div><button type="button" class="next"><span>확인</span></button></div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src="../../js/temp.js">
+</script>
+
+
+</body>
+	<script th:inline="javascript">
+		function moveMenu(menuId) {
+			if (menuId === 'mainPageServiceMenu') {
+				location.href = '/index_service';
+			} else if (menuId === 'mainPageEventMenu') {
+				location.href = '/index_event';
+			} else if (menuId === 'mainPageCustomerMenu') {
+				location.reload();
+			} else if (menuId === 'board') {
+                location.href = '/board';
+            } else if (menuId === 'faq') {
+                location.href = '/faq';
+            } else if (menuId === 'privacy') {
+                location.href = '/privacy';
+            } else if (menuId === 'service') {
+                location.href = '/service';
+            }
+		}
+	</script>
+</html>
